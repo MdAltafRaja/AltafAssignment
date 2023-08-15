@@ -36,6 +36,10 @@ http://localhost:5173/
 
 ```
 
+# Netlify (Deployed) link
+
+[Click Here to Open](https://altaf-assignment.netlify.app/)
+
 # Libraries used are
 
 1) react-icons
