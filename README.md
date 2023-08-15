@@ -4,7 +4,7 @@
 
 ```git
 
-git clone https://github.com/MdAltafRaja/AltafAssignment
+git clone https://github.com/MdAltafRaja/AltafAssignment.git
 
 ```
 
