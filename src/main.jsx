@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
-import DataContextProvider from "./components/DataContextProvider.jsx";
-
+import { Provider } from "react-redux";
+import { store } from "../src/components/redux/store.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <DataContextProvider>
+    <Provider store={store}>
       <App />
-    </DataContextProvider>
+    </Provider>
   </React.StrictMode>
 );

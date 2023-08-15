@@ -1,6 +1,5 @@
 import React from "react";
-import LandingPage from "./components/LandingPage";
-import AllRoutes from "./components/AllRoutes";
+import AllRoutes from "./components/routing/AllRoutes";
 import "./App.css";
 
 function App() {

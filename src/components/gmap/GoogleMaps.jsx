@@ -1,6 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
-import { DataContext } from "./DataContextProvider";
+
+import { useSelector } from "react-redux";
+
 const containerStyle = {
   width: "100%",
   height: "350px",
@@ -8,11 +10,14 @@ const containerStyle = {
 };
 
 function GoogleMaps() {
-  const { profileData } = useContext(DataContext);
+  const profileData = useSelector((state) => state.profileData);
+
+  /*Latitude*/
   let lat = profileData.map((el) => {
     return el.address.geo.lat;
   });
 
+  /* Longitude */
   let lng = profileData.map((el) => {
     return el.address.geo.lng;
   });
@@ -23,7 +28,8 @@ function GoogleMaps() {
     lat: parseFloat(latitude),
     lng: parseFloat(latitude),
   };
-  console.log("profileData", profileData);
+
+  /* Used Google Map Api For developers */
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyDT9IWlGgZLCn2vaQrjyBPAPYMLhXUbprQ",

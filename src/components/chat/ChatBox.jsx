@@ -1,37 +1,32 @@
-import React, { useContext, useEffect, useState } from "react";
-import style from "./letschat.module.css";
-import { DataContext } from "./DataContextProvider";
+import React, {  useEffect, useState } from "react";
+import style from "../../css/chatbox.module.css";
 import { FiX } from "react-icons/fi";
 import { FiSend } from "react-icons/fi";
-function Letschat() {
-  const {
-    data,
-    showProfile,
-    setShowProfile,
-    chatData,
-    getAllData,
-    showChatMsg,
-    setShowChatMsg,
-  } = useContext(DataContext);
-  // const [addMsg,setAddMsg]=useState([])
-  const [tasks, setTasks] = useState([]);
-  const [taskInput, setTaskInput] = useState("");
+import { useDispatch, useSelector } from "react-redux";
+import { toggleShowChatMsg } from "../redux/slice/chatMessageSlice";
+
+
+function ChatBox() {
+
+  const [msg, setMsg] = useState([]);
+  const [msgInput, setMsgInput] = useState("");
   const [hideChat, setHideChat] = useState(true);
-  console.log("LetsChatAltaf", chatData);
-  useEffect(() => {
-    getAllData();
-  }, []);
-  const addTask = () => {
-    if (taskInput.trim() !== "") {
-      setTasks([...tasks, { text: taskInput, completed: false }]);
-      setTaskInput("");
+  
+  const dispatch=useDispatch()
+  const showChatMsg=useSelector((state)=>state.chatMessage)
+  const chatData = useSelector((state) => state.chatData)
+  /* Send Message */
+  const addMsg = () => {
+    if (msgInput.trim() !== "") {
+      setMsg([...msg, { text: msgInput, completed: false }]);
+      setMsgInput("");
     }
   };
-  console.log("tasks", tasks);
-  console.log("taskInput", taskInput);
+
+
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
-      addTask();
+      addMsg();
     }
   };
 
@@ -48,7 +43,7 @@ function Letschat() {
         marginTop: hideChat ? "-270px" : "0px",
       }}
     >
-      <div onClick={() => setShowChatMsg(!showChatMsg)} className={style.chat}>
+      <div onClick={() => dispatch(toggleShowChatMsg())} className={style.chat}>
         <div>
           <img
             src={chatData.profilepicture}
@@ -102,7 +97,7 @@ function Letschat() {
             <p style={{ marginLeft: "10px" }}>Lorem ipsum dolor</p>
           </div>
 
-          {tasks.map((task, index) => (
+          {msg.map((task, index) => (
             <div
               style={{
                 backgroundColor: "#f4eeee",
@@ -112,8 +107,9 @@ function Letschat() {
                 marginTop: "15px",
                 marginLeft: "50px",
               }}
+              key={index}
             >
-              <p key={index} style={{ marginLeft: "10px" }}>
+              <p  style={{ marginLeft: "10px" }}>
                 {task.text}
               </p>
             </div>
@@ -129,8 +125,8 @@ function Letschat() {
           >
             <input
               type="text"
-              value={taskInput}
-              onChange={(e) => setTaskInput(e.target.value)}
+              value={msgInput}
+              onChange={(e) => setMsgInput(e.target.value)}
               onKeyDown={handleKeyPress}
               style={{
                 height: "30px",
@@ -143,7 +139,7 @@ function Letschat() {
               placeholder="Message"
             />
 
-            <div style={{ marginTop: "3px" }} onClick={addTask}>
+            <div style={{ marginTop: "3px" }} onClick={addMsg}>
               <FiSend size={30} color="grey" style={iconStyle} />
             </div>
           </div>
@@ -155,4 +151,4 @@ function Letschat() {
   );
 }
 
-export default Letschat;
+export default ChatBox;

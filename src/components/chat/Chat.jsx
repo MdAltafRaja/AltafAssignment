@@ -1,30 +1,28 @@
-import React, { useContext, useEffect, useState } from "react";
-import style from "./chat.module.css";
-import { DataContext } from "./DataContextProvider";
+import React, { useState } from "react";
+import style from "../../css/chat.module.css";
 import { BsChatRight } from "react-icons/bs";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
+import { useDispatch, useSelector } from "react-redux";
+import { setShowChatMsg } from "../redux/slice/chatMessageSlice";
+import { setChatData } from "../redux/slice/chatDataslice";
+
+/* All the Users and their dp for chat  */
 function Chat() {
-  const {
-    data,
-    showProfile,
-    setShowProfile,
-    getAllData,
-    showChatMsg,
-    setChatData,
-    setShowChatMsg,
-  } = useContext(DataContext);
+  const dispatch = useDispatch();
+  const chatData = useSelector((state) => state.chatData);
+  const data = useSelector((state) => state.fetchData.data?.users || []);
   const [hideChat, setHideChat] = useState(false);
-  useEffect(() => {
-    getAllData();
-  }, []);
+
   const chatHandler = () => {
     setHideChat(!hideChat);
-    setShowChatMsg(false);
+    dispatch(setShowChatMsg(false));
   };
+
   const chatDataHandler = (el) => {
-    setShowChatMsg(true);
-    setChatData(el);
+    dispatch(setShowChatMsg(true));
+    dispatch(setChatData(el));
   };
+
   return (
     <div
       className={style.mainDiv}
@@ -46,7 +44,6 @@ function Chat() {
                   <div className={style.maping_div}>
                     <img src={el.profilepicture} alt="profile image" />
                     <p>{el.name}</p>
-                    {console.log(el.name)}
                   </div>
 
                   <hr />

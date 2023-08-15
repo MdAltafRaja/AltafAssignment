@@ -1,19 +1,21 @@
-import React, { useContext } from "react";
-import style from "./profilebottom.module.css";
-import { DataContext } from "./DataContextProvider";
-import Chat from "./Chat";
-import GoogleMaps from "./GoogleMaps";
-import Letschat from "./Letschat";
+import React, { Fragment } from "react";
+import style from "../../css/profilebottom.module.css";
+import Chat from "../chat/Chat";
+import GoogleMaps from "../gmap/GoogleMaps";
+import ChatBox from "../chat/ChatBox";
+import { useSelector } from "react-redux";
+
+/* Profile Details for the user */
 function ProfileBottom() {
-  const { profileData } = useContext(DataContext);
+  const profileData = useSelector((state) => state.profileData);
   return (
     <div className={style.mainDiv}>
       <div className={style.leftSide}>
         {profileData &&
           profileData.map((el) => {
             return (
-              <>
-                <img src={el.profilepicture} alt="Profile image" />
+              <Fragment key={el.id}>
+                <img src={el.profilepicture} alt="Profile image"  />
                 <p>{el.name}</p>
                 <div className={style.userName}>
                   <div>
@@ -44,7 +46,7 @@ function ProfileBottom() {
                     <h3>{el.company.bs}</h3>
                   </div>
                 </div>
-              </>
+              </Fragment>
             );
           })}
       </div>
@@ -53,7 +55,7 @@ function ProfileBottom() {
         {profileData &&
           profileData.map((el) => {
             return (
-              <>
+              <Fragment key={el.id}>
                 <h2>Address:</h2>
                 <div className={style.address}>
                   <div>
@@ -79,8 +81,8 @@ function ProfileBottom() {
                   </p>
                 </div>
                 <Chat />
-                <Letschat />
-              </>
+                <ChatBox />
+              </Fragment>
             );
           })}
       </div>

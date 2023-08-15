@@ -1,15 +1,17 @@
-import React, { useContext, useEffect } from "react";
-import { DataContext } from "./DataContextProvider";
-import style from "./userdata.module.css";
+import React, { useEffect } from "react";
+import style from "../../css/userdata.module.css";
 import { Link } from "react-router-dom";
-
+import { useDispatch, useSelector } from "react-redux";
+import { fetchData } from "../redux/slice/fetchData";
+/*User data*/
 function UserData() {
-  const { data, getAllData } = useContext(DataContext);
-  console.log("UserDataays", data);
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state.fetchData.data?.users || []);
+
   useEffect(() => {
-    getAllData();
-  }, []);
-  console.log("UserData", data);
+    dispatch(fetchData());
+  }, [dispatch]);
+
   return (
     <div className={style.card_bottom}>
       {data &&

@@ -16,20 +16,21 @@
   padding: 0px;
 }
 
-.maping_div > img {
+.maping_div>img {
   border-radius: 50px;
   width: 35px;
   margin: 0px;
   padding: 0px;
 }
 
-.maping_div > p {
+.maping_div>p {
   font-weight: 400;
   font-size: 17px;
   margin: 0px;
   padding: 0px;
   color: rgb(56, 53, 53);
 }
-.maping_div > p:hover {
+
+.maping_div>p:hover {
   color: rgb(158, 56, 56);
 }

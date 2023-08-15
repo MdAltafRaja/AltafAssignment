@@ -5,6 +5,7 @@ import HomePage from "./HomePage";
 import Gallery from "./Gallery";
 import Posts from "./Posts";
 import Todo from "./Todo";
+/* All Routes*/
 function AllRoutes() {
   return (
     <BrowserRouter>

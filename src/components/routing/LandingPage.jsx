@@ -1,8 +1,8 @@
 import React from "react";
-import style from "./landingpage.module.css";
+import style from "../../css/landingpage.module.css";
 
 import UserData from "./UserData";
-UserData;
+/*Landing Page*/
 function LandingPage() {
   return (
     <div className={style.landingMain}>

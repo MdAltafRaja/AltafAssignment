@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
-import style from "./homepage.module.css";
+import style from "../../css/homepage.module.css";
 import { Link, useLocation } from "react-router-dom";
 
+/*Left Naviigation*/
 function LeftNav() {
   const [id, setId] = useState("1");
   const location = useLocation();
+
   useEffect(() => {
     setId(sessionStorage.getItem("id") || 1);
   }, []);
+
   return (
     <div className={style.mainDiv}>
       <Link
